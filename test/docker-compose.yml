@@ -1,0 +1,14 @@
+version: '3'
+services:
+  behave:
+    image: behave
+    #command: behave
+    network_mode: "host"
+    shm_size: 256m
+    environment:
+      - DISPLAY=$DISPLAY
+      - CHROME_BINARY_PATH=/usr/bin/google-chrome
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    volumes:
+      - .:/behave
+      - /tmp/.X11-unix:/tmp/.X11-unix

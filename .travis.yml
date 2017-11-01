@@ -1,0 +1,15 @@
+sudo: true
+services:
+    - docker
+
+before_install:
+    - docker info
+    - docker version
+
+    - docker build  -t bahave  .
+
+script:
+    - $( cd test ; ./run-test.sh > result )
+
+    - echo "==> Validating the test results..."
+    - grep '1 feature passed, 0 failed, 0 skipped'  test/result
