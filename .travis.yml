@@ -9,7 +9,7 @@ before_install:
     - docker build  -t behave  .
 
 script:
-    - $( cd test ; ./run-test.sh > result )
+    - cd test  &&  ./run-test.sh > result  &&  cd ..
 
     - echo "==> Validating the test results..."
     - grep '1 feature passed, 0 failed, 0 skipped'  test/result

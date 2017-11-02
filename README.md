@@ -22,7 +22,7 @@ This docker image contains the following software stack:
 
 - Selenium wrapper for Python:
   - [Elementium](https://github.com/actmd/elementium): jQuery-style syntactic sugar for Selenium.
-  - [Capybara](https://elliterate.github.io/capybara.py/): a port of Capabara from Ruby.
+  - [Capybara](https://elliterate.github.io/capybara.py/): a port of [Capybara from Ruby](https://en.wikipedia.org/wiki/Capybara_(software)).
 
 
 
