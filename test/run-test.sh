@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -it --rm -v "$(pwd):/behave"  behave  "$@"
+docker run -it -v "$(pwd):/behave:ro"  behave  "$@"

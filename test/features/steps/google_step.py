@@ -1,4 +1,4 @@
-# -- FILE: features/steps/example_steps.py
+# -- FILE: features/steps/google_steps.py
 import requests
 import re
 from behave import given, when, then, step
@@ -6,8 +6,8 @@ from capybara.dsl import *
 from selenium.webdriver.common.keys import Keys
 
 
-URL_GOOGLE_TW = 'https://www.google.com.tw/'
-URL_GOOGLE_TW_SEARCH = 'https://www.google.com.tw/search'
+URL_GOOGLE_TW = 'https://www.google.com.tw/?gl=tw'
+URL_GOOGLE_TW_SEARCH = 'https://www.google.com.tw/search?gl=tw'
 
 
 @given('I am on the Google TW page')

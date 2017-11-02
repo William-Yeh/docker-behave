@@ -7,7 +7,7 @@ dependencies:
     - docker info
     - docker version
 
-    - docker build  -t bahave  .
+    - docker build  -t behave  .
 
 test:
   override:
