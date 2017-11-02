@@ -11,7 +11,5 @@ dependencies:
 
 test:
   override:
-    - cd test  &&  ./run-test.sh > result  &&  cd ..
-
     - echo "==> Validating the test results..."
-    - grep '1 feature passed, 0 failed, 0 skipped'  test/result
+    - cd test  &&  ./run-test.sh | grep '1 feature passed, 0 failed, 0 skipped'
