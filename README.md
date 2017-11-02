@@ -1,6 +1,10 @@
 Docker image for Python-based SBE/BDD tools
 ===
 
+
+[![Circle CI](https://circleci.com/gh/William-Yeh/docker-behave.svg?style=shield)](https://circleci.com/gh/William-Yeh/docker-behave) [![Build Status](https://travis-ci.org/William-Yeh/docker-behave.svg?branch=master)](https://travis-ci.org/William-Yeh/docker-behave)
+
+
 ## Summary
 
 Repository name in Docker Hub: **[williamyeh/behave](https://hub.docker.com/r/williamyeh/behave/)**
@@ -29,6 +33,28 @@ This docker image contains the following software stack:
 ## Usage
 
 
+Given a `features` sub-directory as follows:
+
+```
+.
+└── features
+    ├── environment.py
+    ├── requirements.txt
+    ├── xxx.feature
+    ├── yyy.feature
+    └── steps
+        ├── xxx_step.py
+        └── yyy_step.py
+```
+
+Invoke the program as follows:
+
+```
+$ docker run -it --rm -v "$(pwd):/behave:ro"  williamyeh/behave
+```
+
+
+
 Note: `requirements.txt` in `features` directory.
 
 
@@ -37,7 +63,6 @@ Note: `requirements.txt` in `features` directory.
 
 1. Browser in GUI mode.
 2. Detailed document.
-3. CI by TravisCI and CircleCI.
 4. Firefox?
 5. Flow with Jenkins.
 
