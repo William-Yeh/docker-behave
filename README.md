@@ -33,7 +33,7 @@ This docker image contains the following software stack:
 ## Usage
 
 
-Given a `features` sub-directory as follows:
+**Given** a `features` sub-directory as follows:
 
 ```
 .
@@ -47,12 +47,22 @@ Given a `features` sub-directory as follows:
         └── yyy_step.py
 ```
 
-Invoke the program as follows:
+**When** I invoke the program as follows:
 
 ```
 $ docker run -it --rm -v "$(pwd):/behave:ro"  williamyeh/behave
 ```
 
+**Then** I can see the output as follows:
+
+```
+Feature: ...
+[...]
+1 feature passed, 0 failed, 0 skipped
+7 scenarios passed, 0 failed, 0 skipped
+21 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m11.532s
+```
 
 
 Note: `requirements.txt` in `features` directory.
