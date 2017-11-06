@@ -39,11 +39,19 @@ RUN \
     chmod 0755 /usr/local/bin/chromedriver       && \
     \
     \
-    echo "==> Install behave and other stuff..."   && \
+    \
+    echo "==> Install useful Python stuff..."   && \
     pip3 install --no-cache-dir \
         requests                \
         unittest-xml-reporting  \
         nose                    \
+        mockito                 \
+        pyshould                \
+                                && \
+    \
+    \
+    echo "==> Install behave and related stuff..."   && \
+    pip3 install --no-cache-dir \
         behave                  \
         selenium                \
         elementium              \

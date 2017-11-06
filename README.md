@@ -28,6 +28,11 @@ This docker image contains the following software stack:
   - [Elementium](https://github.com/actmd/elementium): jQuery-style syntactic sugar for Selenium.
   - [Capybara](https://elliterate.github.io/capybara.py/): a port of [Capybara from Ruby](https://en.wikipedia.org/wiki/Capybara_(software)).
 
+- Other useful Python testing libraries for convenience:
+  - [Mockito](http://mockito-python.readthedocs.io/en/latest/): a spying framework ported from Java.
+  - [PyShould](https://github.com/drslump/pyshould): "Should"-style asserts based on [PyHamcrest](https://github.com/hamcrest/PyHamcrest).
+
+
 
 
 ## Usage

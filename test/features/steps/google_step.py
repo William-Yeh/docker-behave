@@ -1,6 +1,7 @@
 # -- FILE: features/steps/google_steps.py
 import requests
 import re
+from pyshould import *
 from behave import given, when, then, step
 from capybara.dsl import *
 from selenium.webdriver.common.keys import Keys
@@ -20,7 +21,7 @@ def step_impl(context):
 def step_impl(context, keyword):
     payload = {'q': keyword}
     r = requests.get(URL_GOOGLE_TW_SEARCH, params=payload)
-    assert (r.status_code / 100) == 2
+    (r.status_code / 100) | should.equal(2)
     # print(r.text)
     context.result_count = count_search_results(r.text)
 
