@@ -6,12 +6,15 @@
 #   - https://eshlox.net/2016/11/22/dockerize-behave-selenium-tests/
 #   - https://gist.github.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5
 #
-# Version     1.0.0
+# For CJK font: https://github.com/elgalu/docker-selenium/pull/153
+#
+#
+# Version     1.1.0
 #
 
 
 # pull base image
-FROM python:3.6
+FROM python:3.6-stretch
 
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
@@ -26,10 +29,15 @@ RUN \
     \
     echo "==> Install prerequisite stuff..."   && \
     apt-get update            && \
-    apt-get install -y           \
+    apt-get install -y --no-install-recommends \
         python3-dev              \
         python3-pip              \
         xvfb                     \
+        libfontconfig            \
+        libfreetype6             \
+        xfonts-scalable          \
+        fonts-liberation         \
+        fonts-noto-cjk           \
         google-chrome-stable  && \
     \
     \
