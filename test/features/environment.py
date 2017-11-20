@@ -63,6 +63,7 @@ def before_all(context):
     elif USE_WEBDRIVER_WRAPPER == WebdriverWrapperType.CAPYBARA:
         capybara.current_driver = "selenium_chrome"
         capybara.default_max_wait_time = 10
+        capybara.current_session().current_window.resize_to(1920, 1080)
         context.driver = capybara
 
 

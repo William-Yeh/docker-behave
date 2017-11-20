@@ -9,12 +9,12 @@
 # For CJK font: https://github.com/elgalu/docker-selenium/pull/153
 #
 #
-# Version     1.1.0
+# Version     1.2.0
 #
 
 
 # pull base image
-FROM python:3.6-stretch
+FROM python:3.6-slim-stretch
 
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
@@ -22,6 +22,16 @@ ENV CHROME_DRIVER_VERSION 2.33
 ENV CHROME_DRIVER_TARBALL http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
 
 RUN \
+    echo "==> Install common stuff missing from the slim base image..."   && \
+    apt-get update            && \
+    apt-get install -y --no-install-recommends \
+        gnupg   \
+        dirmngr \
+        wget    \
+        ca-certificates               && \
+        rm -rf /var/lib/apt/lists/*   && \
+    \
+    \
     echo "==> Add Google repo for Chrome..."   && \
     wget -q -O- https://dl.google.com/linux/linux_signing_key.pub | apt-key add -  && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google.list  && \
@@ -64,7 +74,12 @@ RUN \
         selenium                \
         elementium              \
         capybara-py             \
-        xvfbwrapper
+        xvfbwrapper             && \
+    \
+    \
+    echo "==> Clean up..."      && \
+    rm -rf /var/lib/apt/lists/*
+
 
 
 

@@ -16,7 +16,7 @@ This repository contains Dockerized Python tools for SBE/BDD, published to the p
 
 This docker image contains the following software stack:
 
-- Base image: Debian jessie + [Python 3](https://hub.docker.com/_/python/).
+- Base image: Debian Stretch + [Python 3](https://hub.docker.com/_/python/).
 
 - [Behave](https://pypi.python.org/pypi/behave): behavior-driven development, Python style.
 
