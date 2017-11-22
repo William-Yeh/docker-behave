@@ -73,13 +73,85 @@ Took 0m11.532s
 Note: `requirements.txt` in `features` directory.
 
 
+## Run with browser in headless mode
+
+This is the default mode.
+
+
+## Run with desktop's browser
+
+To run with the desktop's browser, please follow the steps.
+
+```
++---------------------------------------------------------+
+|                                                         |
+|                                                 host    |
+|   +----------------+                                    |
+|   |     Docker     |                                    |
+|   |                |                                    |
+|   |                |                                    |
+|   |                |                                    |
+|   |                |                                    |
+|   |    container   |                        Chrome      |
+|   |        |       |      ChromeDriver      browser     |
+|   +----------------+       |        |          |        |
+|            |               |        |          |        |
+|            +---------------+        +----------+        |
+|                    /wd/hub:9515                         |
+|                                                         |
++---------------------------------------------------------+
+```
+
+
+### Requirements
+
+1. Install [Chrome](https://www.google.com.tw/chrome/browser/desktop/).
+
+2. Install [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/). Mac users can install it as follows:
+
+   ```
+   $ brew install chromedriver
+   ```
+
+
+### Configuration
+
+Configure `features/environment.py` as follows:
+
+```python
+
+# connect from Docker container to host
+REMOTE_CHROME_ADDR = "http://docker.for.mac.localhost:9515/wd/hub"
+
+@capybara.register_driver("selenium_remote_chrome")
+def init_selenium_chrome_driver(app):
+    from capybara.selenium.driver import Driver
+    return Driver(app, browser="remote",
+                  command_executor=REMOTE_CHROME_ADDR,
+                  desired_capabilities=DesiredCapabilities.CHROME)
+
+
+def before_all(context):
+    capybara.current_driver = "selenium_remote_chrome"
+```
+
+
+### Run
+
+1. Start the ChromeDriver with base URL path `/wd/hub` and default port `9515`:
+
+   ```
+   $ chromedriver --url-base=/wd/hub
+   ```
+
+2. Now you're ready to run `williamyeh:behave`!
+
 
 ## TODO
 
-1. Browser in GUI mode.
-2. Detailed document.
-4. Firefox?
-5. Flow with Jenkins.
+1. Detailed document.
+2. Firefox?
+3. Flow with Jenkins.
 
 
 

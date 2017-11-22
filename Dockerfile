@@ -20,6 +20,8 @@ MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
 ENV CHROME_DRIVER_VERSION 2.33
 ENV CHROME_DRIVER_TARBALL http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+ENV CAPYBARA_PATCH_SRC    https://raw.githubusercontent.com/William-Yeh/capybara.py/master/capybara/selenium/browser.py
+ENV CAPYBARA_PATCH_DEST   /usr/local/lib/python3.6/site-packages/capybara/selenium/browser.py
 
 RUN \
     echo "==> Install common stuff missing from the slim base image..."   && \
@@ -77,10 +79,12 @@ RUN \
         xvfbwrapper             && \
     \
     \
+    echo "==> Patch Capybara..."   && \
+    wget -q -O $CAPYBARA_PATCH_DEST $CAPYBARA_PATCH_SRC  && \
+    \
+    \
     echo "==> Clean up..."      && \
     rm -rf /var/lib/apt/lists/*
-
-
 
 
 ENV PATH /usr/lib/chromium/:$PATH

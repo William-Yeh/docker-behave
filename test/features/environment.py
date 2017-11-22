@@ -1,10 +1,12 @@
 #
-#
+# @see https://pypi.python.org/pypi/selenium
 # @see https://github.com/actmd/elementium
+# @see https://elliterate.github.io/capybara.py/
 #
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from elementium.drivers.se import SeElements
 import capybara
 
@@ -12,11 +14,6 @@ import capybara
 # se = SeElements(webdriver.Firefox())
 # se.navigate("http://www.python.org").insist(lambda e: "Python" in e.title)
 # se.find("q").write("selenium" + Keys.RETURN)
-
-
-import os
-
-#from xvfbwrapper import Xvfb
 
 
 from enum import Enum
@@ -38,21 +35,17 @@ chrome_options = Options()
 chrome_options.add_argument('headless')
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
-# if CHROME_BINARY_PATH:
-#    chrome_options.binary_location = CHROME_BINARY_PATH
+chrome_options.add_argument('window-size=1920,1080')
 
 
-CHROME_BINARY_PATH = os.environ.get('CHROME_BINARY_PATH')
+# set remote webdriver addr, if necessary
+REMOTE_CHROME_ADDR = "http://docker.for.mac.localhost:9515/wd/hub"  # from Docker container to host
+#REMOTE_CHROME_ADDR = "http://127.0.0.1:9515/"                      # from host to the same host
 
 
 def before_all(context):
-    #context.vdisplay = Xvfb()
-    # context.vdisplay.start()
     print("> Starting the browser")
-    #browser = context.config.userdata.get("browser")
-    #context.driver = webdriver.Firefox()
 
-    #chrome_options = Options()
     global chrome_options
 
     if USE_WEBDRIVER_WRAPPER == WebdriverWrapperType.RAW:
@@ -61,10 +54,10 @@ def before_all(context):
         context.driver = SeElements(
             webdriver.Chrome(chrome_options=chrome_options))
     elif USE_WEBDRIVER_WRAPPER == WebdriverWrapperType.CAPYBARA:
-        capybara.current_driver = "selenium_chrome"
+        capybara.current_driver = "selenium_chrome"          # headless
+        #capybara.current_driver = "selenium_remote_chrome"  # gui
         capybara.default_max_wait_time = 10
         capybara.current_session().current_window.resize_to(1920, 1080)
-        context.driver = capybara
 
 
 def after_all(context):
@@ -77,11 +70,17 @@ def after_all(context):
     elif USE_WEBDRIVER_WRAPPER == WebdriverWrapperType.CAPYBARA:
         pass
 
-    # context.vdisplay.stop()
-
 
 @capybara.register_driver("selenium_chrome")
 def init_selenium_chrome_driver(app):
     from capybara.selenium.driver import Driver
     global chrome_options
     return Driver(app, browser="chrome", chrome_options=chrome_options)
+
+
+@capybara.register_driver("selenium_remote_chrome")
+def init_selenium_chrome_driver(app):
+    from capybara.selenium.driver import Driver
+    return Driver(app, browser="remote",
+                  command_executor=REMOTE_CHROME_ADDR,
+                  desired_capabilities=DesiredCapabilities.CHROME)
