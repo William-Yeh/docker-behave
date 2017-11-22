@@ -75,7 +75,7 @@ Note: `requirements.txt` in `features` directory.
 
 ## Run with browser in headless mode
 
-This is the default mode.
+This is the default mode.  All are done within the Docker container.
 
 
 ## Run with desktop's browser
@@ -144,7 +144,7 @@ def before_all(context):
    $ chromedriver --url-base=/wd/hub
    ```
 
-2. Now you're ready to run `williamyeh:behave`!
+2. Now you're ready to run `williamyeh/behave`!
 
 
 ## TODO

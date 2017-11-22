@@ -40,7 +40,7 @@ chrome_options.add_argument('window-size=1920,1080')
 
 # set remote webdriver addr, if necessary
 REMOTE_CHROME_ADDR = "http://docker.for.mac.localhost:9515/wd/hub"  # from Docker container to host
-#REMOTE_CHROME_ADDR = "http://127.0.0.1:9515/"                      # from host to the same host
+#REMOTE_CHROME_ADDR = "http://127.0.0.1:9515/wd/hub"                # from host to the same host
 
 
 def before_all(context):
