@@ -103,7 +103,7 @@ To run with the desktop's browser, please follow the steps.
 ```
 
 
-### Requirements
+### Requirements for host environment
 
 1. Install [Chrome](https://www.google.com.tw/chrome/browser/desktop/).
 
@@ -119,20 +119,22 @@ To run with the desktop's browser, please follow the steps.
 Configure `features/environment.py` as follows:
 
 ```python
+# import useful functions
+from environment_common import init_selenium_chrome_driver
+from environment_common import use_headless_mode
+from environment_common import set_remote_chrome_addr
+...
 
-# connect from Docker container to host
-REMOTE_CHROME_ADDR = "http://docker.for.mac.localhost:9515/wd/hub"
 
-@capybara.register_driver("selenium_remote_chrome")
-def init_selenium_chrome_driver(app):
-    from capybara.selenium.driver import Driver
-    return Driver(app, browser="remote",
-                  command_executor=REMOTE_CHROME_ADDR,
-                  desired_capabilities=DesiredCapabilities.CHROME)
+# invoke them, if necessary
+use_headless_mode(False)
+...
 
+
+# customize hooks, if necessary
 
 def before_all(context):
-    capybara.current_driver = "selenium_remote_chrome"
+    ...
 ```
 
 

@@ -1,0 +1,44 @@
+#
+# TODO: workspace or cache for build/test workflows
+#       https://circleci.com/docs/2.0/jobs-steps/
+
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    machine: true
+    #docker:
+    #  - image: docker:18.06.1-ce
+      #- image: docker:18.06.1-ce-git
+    steps:
+      - checkout
+      #- setup_remote_docker:
+      #    docker_layer_caching: true
+      - run:
+          name: build application docker image
+          command: |
+            docker build  -t behave  .
+      - run:
+          name: Validating the test results
+          command: |
+            cd test  &&  ./run-test.sh | grep '1 feature passed, 0 failed, 0 skipped'
+
+  #test:
+  #  working_directory: ~/app
+  #  machine: true
+  #  steps:
+  #    #- checkout
+  #    - run:
+  #        name: Validating the test results
+  #        command: |
+  #          cd test  &&  ./run-test.sh | grep '1 feature passed, 0 failed, 0 skipped'
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      #- test:
+      #    requires:
+      #      - build

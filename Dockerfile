@@ -9,7 +9,7 @@
 # For CJK font: https://github.com/elgalu/docker-selenium/pull/153
 #
 #
-# Version     1.2.0
+# Version     1.2.1
 #
 
 
@@ -18,10 +18,8 @@ FROM python:3.6-slim-stretch
 
 MAINTAINER William Yeh <william.pjyeh@gmail.com>
 
-ENV CHROME_DRIVER_VERSION 2.33
+ENV CHROME_DRIVER_VERSION 2.42
 ENV CHROME_DRIVER_TARBALL http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-ENV CAPYBARA_PATCH_SRC    https://raw.githubusercontent.com/William-Yeh/capybara.py/master/capybara/selenium/browser.py
-ENV CAPYBARA_PATCH_DEST   /usr/local/lib/python3.6/site-packages/capybara/selenium/browser.py
 
 RUN \
     echo "==> Install common stuff missing from the slim base image..."   && \
@@ -77,10 +75,6 @@ RUN \
         elementium              \
         capybara-py             \
         xvfbwrapper             && \
-    \
-    \
-    echo "==> Patch Capybara..."   && \
-    wget -q -O $CAPYBARA_PATCH_DEST $CAPYBARA_PATCH_SRC  && \
     \
     \
     echo "==> Clean up..."      && \
