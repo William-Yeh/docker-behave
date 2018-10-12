@@ -14,14 +14,14 @@ URL_GOOGLE_TW_SEARCH = 'https://www.google.com.tw/search?gl=tw'
 @given('I am on the Google TW page')
 def step_impl(context):
     r = requests.get(URL_GOOGLE_TW)
-    assert (r.status_code / 100) == 2
+    assert int(r.status_code / 100) == 2
 
 
 @when('I search \'{keyword}\'')
 def step_impl(context, keyword):
     payload = {'q': keyword}
     r = requests.get(URL_GOOGLE_TW_SEARCH, params=payload)
-    (r.status_code / 100) | should.equal(2)
+    int(r.status_code / 100) | should.equal(2)
     # print(r.text)
     context.result_count = count_search_results(r.text)
 
