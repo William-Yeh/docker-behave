@@ -58,9 +58,11 @@ def step_impl(context, keyword):
     # result_text = context.driver.find("#resultStats", wait=True).item.text
 
     #--> capybara version
-    find("#lst-ib").set(keyword)
+    #find("#lst-ib").set(keyword)
+    find('[name=q]').set(keyword)
     #fill_in("lst-ib", keyword)
-    find("#lst-ib").native.send_keys(Keys.RETURN)
+    #find("#lst-ib").native.send_keys(Keys.RETURN)
+    find('[name=q]').native.send_keys(Keys.RETURN)
     #find('[name=btnK]').click
     # save_screenshot("screenshot.png")
     result_text = find("#resultStats").text

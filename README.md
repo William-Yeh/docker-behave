@@ -113,6 +113,12 @@ To run with the desktop's browser, please follow the steps.
    $ brew install chromedriver
    ```
 
+   Windows users can install it as follows:
+
+   ```
+   > choco install chromedriver
+   ```
+
 
 ### Configuration
 
@@ -146,7 +152,15 @@ def before_all(context):
    $ chromedriver --url-base=/wd/hub
    ```
 
+
 2. Now you're ready to run `williamyeh/behave`!
+
+
+If you encounter the error `WebDriverException: Message: Host header or origin header is specified and is not localhost.` try to add the container's IP address into the whitelist as follows:
+
+   ```
+   $ chromedriver --url-base=/wd/hub --whitelisted-ips="xxx.xxx.xxx.xxx"
+   ```
 
 
 ## TODO

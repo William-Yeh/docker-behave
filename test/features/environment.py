@@ -17,4 +17,6 @@ from environment_common import set_remote_chrome_addr
 print('------------------')
 #use_headless_mode(False)
 #behave_use_capybara()
-#set_remote_chrome_addr('http://127.0.0.1:9515/wd/hub')
+#set_remote_chrome_addr('http://127.0.0.1:9515/wd/hub')                 # from host to the same host
+#set_remote_chrome_addr('http://docker.for.mac.localhost:9515/wd/hub')  # from Docker container to Mac host
+#set_remote_chrome_addr('http://docker.for.win.localhost:9515/wd/hub')  # from Docker container to Windows host
